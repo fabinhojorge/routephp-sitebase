@@ -1,34 +1,58 @@
 <?
-function redirecionar($p) {
-	$path = $p;
+
+include("settings.php");
+
+
+function redirecionar($p, $conf, $c, $a) {
+
+
+    $path_file = $p;
+    $controller = $c;
+    $action = $a;
     $header = "layout/header.php";
+    $nav = "layout/navigation.php";
     $footer = "layout/footer.php";
     $layout = "layout/layout.php";
 
     include($layout);
 }
 
-$path = ltrim($_SERVER['REQUEST_URI'], '/');
-$elements = explode('/', $path);
+function error404(){
+    header('HTTP/1.1 404 Not Found');
+    echo "Page not Found";
+}
 
-if(count($elements) == 0){                       // No path elements means home
-    redirecionar("home.php");
+
+//$path = ltrim($_SERVER['REQUEST_URI'], '/');
+
+$elements = explode('/', $conf['base_url']);
+
+if(count($elements) == 0){
+    redirecionar("inicio.php", $conf);
 }else{ 
 	
-	$route = strtolower(array_pop($elements));
-	
-	switch($route){
+    //$route = strtolower(array_pop($elements));
+    //$controller = array_shift(array_values($elements));
+    $elements = array_reverse($elements, true);
+    $controller = array_pop($elements);
+    $action = array_pop($elements);
 
-    case '':
-    case "home":
-    	redirecionar("home.php");
-        break;
-    case 'contato':
-    	redirecionar("contato.php");
-    	break;
-    default:
-        //header('HTTP/1.1 404 Not Found');
-        echo "Page not Found";
+    
+	switch($controller){
+
+        case '':
+        case 'index':
+        case 'index.php':
+        case 'home':
+        case 'home.php':
+            redirecionar("home.php", $conf, $c="home", $a="");
+            break;
+        case 'email':
+            include("send_email.php");
+            break;
+        default:
+            error404();
 	}
 }
+
 ?>
