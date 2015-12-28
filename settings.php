@@ -1,16 +1,16 @@
 <?global $conf;
 
-$smtp_host = "" //smtp host;
+$smtp_host = ""; //smtp host;
 $smtp_port = 587;
-$mail_user = "" //email;
-$mail_password = "" //password;
-$mail_from = "" //smtp email;
-$mail_from_name = "" //name of the smtp user;
-$mail_to = "" //destiny;
-$mail_reply_to = "" //email to reply;
+$mail_user = ""; //email;
+$mail_password = ""; //password;
+$mail_from = ""; //smtp email;
+$mail_from_name = ""; //name of the smtp user;
+$mail_to = ""; //destiny;
+$mail_reply_to = ""; //email to reply;
 
 
-$static_path = "" //base folder e.g.: /site/public/;
+$static_path = "routephp-sitebase"; //base folder e.g.: /site/public/;
 
 
 $conf = array();

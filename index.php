@@ -28,7 +28,7 @@ function error404(){
 $elements = explode('/', $conf['base_url']);
 
 if(count($elements) == 0){
-    redirecionar("inicio.php", $conf);
+    redirecionar("home.php", $conf, $c="home", $a="index");
 }else{ 
 	
     //$route = strtolower(array_pop($elements));
@@ -45,7 +45,9 @@ if(count($elements) == 0){
         case 'index.php':
         case 'home':
         case 'home.php':
-            redirecionar("home.php", $conf, $c="home", $a="");
+        case 'inicio':
+        case 'inicio.php':
+            redirecionar("home.php", $conf, $c="home", $a="index");
             break;
         case 'email':
             include("send_email.php");
